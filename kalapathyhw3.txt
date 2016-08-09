@@ -1,0 +1,85 @@
+//Branavan Kalapathy
+//6/14/2016
+// This is a program that will simulate Galton's Board
+
+// include statements
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+// function prototypes
+void initialize(int[10][20]);
+void initDrop(int, int[10][20]);
+void drop(int[10][20]);
+void print(int[20]);
+int max(int[20]);
+
+// main method
+int main() {
+ srand(time(0));
+ int counts[10][20];
+ int nBalls = 0;
+ cout << "Enter number of balls ==> ";
+ cin >> nBalls;
+ initialize(counts);
+ initDrop(nBalls, counts);
+ drop(counts);
+ print(counts[9]);
+ return 0;
+}
+
+// function declarations
+void initialize(int counts[10][20]) {
+ for (int i = 0; i < 10; i++)
+  for (int j = 0; j < 20; j++)
+   counts[i][j] = 0;
+}
+
+void initDrop(int nBalls, int counts[10][20]) {
+ for (int i = 1; i < nBalls + 1; i++) {
+  int r = rand() % 2;
+  counts[0][9 + r]++;
+ }
+
+}
+
+void drop(int counts[10][20]) {
+ for (int i = 1; i < 10; i++)
+  for (int box = 10 - i; box < 10 + i; box++) {
+   int balls = counts[i - 1][box];
+   for (int ball = 1; ball <= balls; ball++) {
+    int r = rand() % 2;
+    if (r == 1)
+     counts[i][box+1]++;
+    else
+     counts[i][box-1]++;
+   }
+  }
+}
+void print(int count[20]) {
+ int max1 = max(count);
+ int scaleFactor = max1 / 75;
+ cout << "The Maxinum is: " << max1 << " each * is :" << scaleFactor << endl;
+ for (int i = 0; i < 20; i++) {
+  cout << setw(2) << i;
+  for (int j = 0; j < count[i] / scaleFactor; j++) {
+   cout << "*";
+  }
+  cout << endl;
+ }
+ int wait; cin >> wait;
+}
+
+int max(int count[20]) {
+ int max = count[0];
+ for (int i = 1; i<20; i++) {
+  if (max < count[i]) {
+   max = count[i];
+  }
+ }
+ return max;
+}
+
+

@@ -1,0 +1,26 @@
+//Branavan Kalapathy
+//6/21/2016
+//This is a program that will input a string then output the same string
+//reverse order using pointers.
+
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main()
+{
+        char str[50];
+        cout << "Enter a string :";
+        cin.getline(str,50);
+        char *head = str;
+        char *tail = str + strlen(str) - 1;
+        while (head < tail) {
+                char temp = *tail;
+                *tail-- = *head;
+                *head++ = temp;
+        }
+        cout << "Here is the reversed order:" <<  str << endl;
+
+    return 0;
+}

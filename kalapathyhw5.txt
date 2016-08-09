@@ -1,0 +1,79 @@
+//Branavan Kalapathy
+//6/30/2016
+//This is program that will generate a point using curses.
+#include <iostream>
+#include <curses.h>
+#include <cstdlib>
+#include <string>
+using namespace std;
+
+     class Point {
+          public:
+             void set(int,int);
+             int getrow();
+             int getcol();
+             void print();
+             void input();
+             int getint(string);
+
+          private:
+             int row;
+             int col;
+         };
+        int main(){
+            int r,c;
+            initscr();
+            cbreak();;
+            getmaxyx(stdscr, r, c);
+            Point p;
+            p.input();
+            p.print();
+            r = p.getint("row?");
+            c = p.getint("col?");
+            nocbreak();
+            endwin();
+        return 0;
+        }
+
+     void Point::set(int r, int c){
+
+                row = r;
+                col = c;
+       }
+     int Point::getrow(){
+	
+        return row;
+        }
+     int Point::getcol(){
+
+        return col;
+        }
+     void Point::print(){
+
+          move(row,col);
+          printw("*");
+        }
+     void Point::input(){
+         int r  = getint("Enter the rows:");
+         int c  = getint("Enter the columns:");
+         set(r,c);
+        }
+
+     int Point::getint(string prompt) {
+          char chin, wd[100];
+
+
+          int i=0;
+          move(1,1);
+          printw("%s ",prompt.c_str());
+          chin = getch();
+           while (chin!='\n') {
+                 wd[i++]=chin;
+                 chin=getch();
+        }
+          wd[i]='\0';
+          return atoi(wd);
+        }
+
+
+

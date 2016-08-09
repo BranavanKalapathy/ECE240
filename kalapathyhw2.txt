@@ -1,0 +1,45 @@
+// Branavan Kalapathy
+// 6/7/2016
+//This is program that will use the monte carlo calculation method
+// to calculate the value of pi, display the number of points in
+//the circle and find the difference. 
+
+
+
+#include <iostream>
+using namespace std;
+#include <cstdlib>
+#include <cmath>
+
+
+int main (){
+    srand(time(NULL));
+    double pi;
+    double n;
+    double x =0.0,y=0.0;
+    double m=0.0;
+
+    cout << "Enter the number of points:" << endl;
+    cin>> n;
+    for (int i = 0; i<n; i++){
+    x = static_cast<double>(rand())/static_cast<double>(RAND_MAX);
+    y = static_cast<double>(rand())/static_cast<double>(RAND_MAX);
+    if (pow(x,2)+pow(y,2)<=1){
+        m++;
+      }
+
+      }
+    cout << n << endl;
+
+    cout << m << endl;
+
+    pi = m/n*4.0;
+
+
+    cout << "Points that are in the unit circle:" << m  << endl;
+    cout << "The actual value of pi is " << M_PI<< endl;
+    cout << "The Monte Carlo apporixmation of pi is " << pi << endl;
+    cout << " the difference is " << M_PI-pi << endl;
+
+    return 0;
+}

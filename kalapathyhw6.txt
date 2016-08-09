@@ -1,0 +1,38 @@
+//Branavan Kalapathy
+// 7/28/2016
+
+#include <iostream>
+using namespace std;
+#include <string>
+class JString{
+
+        friend ostream &operator<<( ostream &output,  const JString &jStr );
+        public:
+		JString(string s);
+		JString &operator+(int n);
+
+	private:
+          string str;
+
+};
+  JString::JString(string s):str(s){
+          }
+        
+    ostream &operator<<( ostream &output,  const JString &jStr ){
+         output << jStr.str;
+         return output;
+        }
+
+         JString& JString::&operator+(int n ){
+         JString js(this-> str + to_string(n));
+         return JString;
+      
+
+int main(){
+
+        int n(10);
+        JString ans=n+str;
+        cout << ans << endl;
+
+return 0;
+}
